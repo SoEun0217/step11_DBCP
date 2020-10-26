@@ -33,6 +33,10 @@ $(function(){
 		$("[name=search]").submit();
 	})
 	
+	$("[value=삭제하기]").click(function(){
+		var id = $(this).attr('id');
+		location.href = "${pageContext.request.contextPath}/delete?id="+id;
+	});
 	
 	
 	
@@ -50,7 +54,7 @@ $(function(){
   <tr>
     <th colspan="9" style="text-align:right">
       <a href="memberForm.html">[ 회원가입 ]</a>&nbsp;&nbsp;&nbsp;
-      <a href="#">[ 새로고침 ]</a>&nbsp;&nbsp;&nbsp;
+      <a href="index.jsp">[ 새로고침 ]</a>&nbsp;&nbsp;&nbsp;
     </th>
   </tr>
   <tr bgColor="pink">
@@ -76,7 +80,7 @@ $(function(){
     	  <td>${selectAll.addr}</td>
     	  <td>${selectAll.phone}</td>
     	  <td>${selectAll.joinDate}</td>
-    	  <td><input type="button" value="삭제하기" name="${selectAll.id}"/></td>
+    	  <td><input type="button" value="삭제하기" id="${selectAll.id}"/></td>
     	</tr>
     </c:forEach>
  

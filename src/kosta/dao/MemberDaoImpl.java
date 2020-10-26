@@ -53,13 +53,13 @@ public class MemberDaoImpl implements MemberDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<Member>list = new ArrayList<Member>();
-		String sql="select  ID,PWD,NAME,AGE,PHONE,ADDR,JOIN_DATE from memeber where ";
+		String sql="";
 		if(keyField.equals("id")) {
-			sql+="id like ?";
+			sql="select ID,PWD,NAME,AGE,PHONE,ADDR,JOIN_DATE from member where id like ?";
 		}else if(keyField.equals("name")) {
-			sql+="name like ?";
+			sql="select ID,PWD,NAME,AGE,PHONE,ADDR,JOIN_DATE from member where name like ?";
 		}else if(keyField.equals("addr")){
-			sql+="addr like ?";
+			sql="select ID,PWD,NAME,AGE,PHONE,ADDR,JOIN_DATE from member where addr like ?";
 		}
 		try {
 			con = DbUtil.getConnection();
