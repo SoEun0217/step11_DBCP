@@ -24,11 +24,18 @@ public class SearchServlet extends HttpServlet {
 		//keyField,keyWord를 받기
 		String keyField = request.getParameter("keyField");
 		String keyWord = request.getParameter("keyWord");
+		String url = "memberSelect.jsp";
 		MemberDAO dao = new MemberDaoImpl();
 		List<Member> list = dao.searchByKeyWord(keyField, keyWord);
 		//dao쪽의 검색메소드 호출한 후 그 결과를 가지고 memberSelect.jsp이동
-		request.setAttribute("selectAll", list);
-		request.getRequestDispatcher("memberSelect.jsp").forward(request, response);
+		if(list.size()==0) {
+			request.setAttribute("msg", keyField+"에 해당하는 정보가 없습니다.");
+			url= "error.jsp";
+		}else {
+			request.setAttribute("selectAll", list);
+		}
+		
+		request.getRequestDispatcher(url).forward(request, response);
 	}
 
 }

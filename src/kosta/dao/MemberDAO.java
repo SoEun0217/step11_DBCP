@@ -34,4 +34,9 @@ public interface MemberDAO {
 	 * */
 	int delete(String id);
 	
+	
+	/**
+	 * 상세보기
+	 * */
+	Member detailClient(String id);
 }

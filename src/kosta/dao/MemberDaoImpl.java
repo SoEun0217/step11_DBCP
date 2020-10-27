@@ -153,4 +153,34 @@ public class MemberDaoImpl implements MemberDAO {
 		return result;
 	}
 
+	@Override
+	public Member detailClient(String id) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		Member member = null;
+		ResultSet rs = null;
+		String sql = "select ID,PWD,NAME,AGE,PHONE,ADDR,JOIN_DATE from member where id =?";
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, id);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				id = rs.getString(1);//ID
+				String pwd = rs.getString(2);//pwd
+				String name= rs.getString(3);
+				int age = rs.getInt(4);
+				String phone = rs.getString(5);
+				String addr = rs.getString(6);
+				String joinDate = rs.getString(7);
+				member  = new Member(id,pwd,name,age,phone,addr,joinDate);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DbUtil.dbClose(rs, ps, con);
+		}
+		return member;
+	}
+
 }

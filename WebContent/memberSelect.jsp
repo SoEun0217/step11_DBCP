@@ -33,12 +33,17 @@ $(function(){
 		$("[name=search]").submit();
 	})
 	
+	//삭제하기
 	$("[value=삭제하기]").click(function(){
-		var id = $(this).attr('id');
-		location.href = "${pageContext.request.contextPath}/delete?id="+id;
+		if(confirm("정말 삭제할래?")){
+			var id = $(this).attr('id');
+			//항상 pageContext의 contextPath 를 사용하는게 습관이 되자
+			//보안상 문제일 때는 포스트 방식으로 hidden인 form으로 submit시킨다.
+			location.href = "${pageContext.request.contextPath}/delete?id="+id;
+		}
+		
+		
 	});
-	
-	
 	
 })
 
@@ -54,7 +59,7 @@ $(function(){
   <tr>
     <th colspan="9" style="text-align:right">
       <a href="memberForm.html">[ 회원가입 ]</a>&nbsp;&nbsp;&nbsp;
-      <a href="index.jsp">[ 새로고침 ]</a>&nbsp;&nbsp;&nbsp;
+      <a href="selectAll">[ 새로고침 ]</a>&nbsp;&nbsp;&nbsp;
     </th>
   </tr>
   <tr bgColor="pink">
@@ -73,7 +78,7 @@ $(function(){
     <c:forEach items="${selectAll}" var="selectAll" varStatus="state">
     	<tr>
     	  <td>${state.count}</td>
-    	  <td>${selectAll.id}</td>
+    	  <td><a href="detail?id=${selectAll.id}">${selectAll.id}</a></td>
     	  <td>${selectAll.pwd}</td>
     	  <td>${selectAll.name}</td>
     	  <td>${selectAll.age}</td>
